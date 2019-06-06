@@ -1,3 +1,11 @@
+// TODO: For now, we're just passing this through from useForm to useField as a JS object, so there's no type safety if the caller uses it directly.
+// A better way to handle this is:
+//
+//    1. Create a `form` record type with a jsConverter annotation
+//    2. Add all fields to this record type
+//    3. Pass this record object out to the caller by converting it to/from JS at the boundaries
+//
+// #2 has to be implemented fully for this to work so that useField gets the right object properties.
 type rffForm = Js.t({
   .
 });
@@ -8,6 +16,7 @@ type rffUseFormOptions = Js.t({
   onSubmit: option(Js.Dict.t(string)) => unit,
 });
 
+// TODO: Add all form render props
 type rffFormRenderProps = Js.t({
   .
   pristine: bool,
@@ -17,8 +26,9 @@ type rffFormRenderProps = Js.t({
   valid: bool
 });
 
-[@bs.module "react-final-form-hooks"] external rffUseForm : rffUseFormOptions => rffFormRenderProps = "useForm"
+[@bs.module "react-final-form-hooks"] external rffUseForm : rffUseFormOptions => rffFormRenderProps = "useForm";
 
+// TODO: Add all form render props
 [@bs.deriving jsConverter]
 type formRenderProps = {
   pristine: bool,
@@ -39,7 +49,7 @@ let useForm = (~onSubmit, ~validate=?, ()) => {
     formRenderPropsFromJs(renderProps);
 };
 
-type rffFieldInputProps = Js.t({
+type rffFieldInputRenderProps = Js.t({
   .
   name: string,
   value: string,
@@ -48,7 +58,8 @@ type rffFieldInputProps = Js.t({
   onFocus: ReactEvent.Focus.t => unit
 })
 
-type rffFieldMetaProps = Js.t({
+// TODO: Add all field meta props
+type rffFieldMetaRenderProps = Js.t({
   .
   touched: bool,
   valid: bool
@@ -56,16 +67,16 @@ type rffFieldMetaProps = Js.t({
 
 type rffFieldRenderProps = Js.t({
   .
-  input: rffFieldInputProps,
-  meta: rffFieldMetaProps
+  input: rffFieldInputRenderProps,
+  meta: rffFieldMetaRenderProps
 });
 
-type rffFieldValidator = option(option(string) => option(string));
+type rffFieldValidateFn = option(option(string) => option(string));
 
-[@bs.module "react-final-form-hooks"] external rffUseField : (string, rffForm, rffFieldValidator) => rffFieldRenderProps = "useField";
+[@bs.module "react-final-form-hooks"] external rffUseField : (string, rffForm, rffFieldValidateFn) => rffFieldRenderProps = "useField";
 
 [@bs.deriving jsConverter]
-type fieldInputProps = {
+type fieldInputRenderProps = {
   name: string,
   value: string,
   onChange: ReactEvent.Form.t => unit,
@@ -73,15 +84,16 @@ type fieldInputProps = {
   onFocus: ReactEvent.Focus.t => unit
 };
 
+// TODO: Add all field meta props
 [@bs.deriving jsConverter]
-type fieldMetaProps = {
+type fieldMetaRenderProps = {
   touched: bool,
   valid: bool
 };
 
 type fieldRenderProps = {
-  input: fieldInputProps,
-  meta: fieldMetaProps
+  input: fieldInputRenderProps,
+  meta: fieldMetaRenderProps
 }
 
 let useField = (~name, ~form, ~validate=?, ()) => {
@@ -89,7 +101,7 @@ let useField = (~name, ~form, ~validate=?, ()) => {
   // Js.log(renderProps);
 
   {
-    input: fieldInputPropsFromJs(renderProps##input),
-    meta: fieldMetaPropsFromJs(renderProps##meta)
+    input: fieldInputRenderPropsFromJs(renderProps##input),
+    meta: fieldMetaRenderPropsFromJs(renderProps##meta)
   }
 }

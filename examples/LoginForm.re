@@ -13,7 +13,7 @@ let make = () => {
   };
 
   let { ReactFinalFormHooks.pristine, handleSubmit, form, valid } = ReactFinalFormHooks.useForm(~onSubmit=onSubmit, ~validate=LoginFormValidations.validate, ());
-
+  
   let usernameField = ReactFinalFormHooks.useField(~name="username", ~form=form, ());
   let passwordField = ReactFinalFormHooks.useField(~name="password", ~form=form, ~validate=LoginFormValidations.validatePassword, ());
 
