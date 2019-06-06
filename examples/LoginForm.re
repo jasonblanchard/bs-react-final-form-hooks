@@ -12,10 +12,10 @@ let make = () => {
     }
   };
 
-  let { Forms.pristine, handleSubmit, form, valid } = Forms.useForm(~onSubmit=onSubmit, ~validate=LoginFormValidations.validate, ());
+  let { ReactFinalFormHooks.pristine, handleSubmit, form, valid } = ReactFinalFormHooks.useForm(~onSubmit=onSubmit, ~validate=LoginFormValidations.validate, ());
 
-  let username = Forms.useField(~name="username", ~form=form, ());
-  let password = Forms.useField(~name="password", ~form=form, ~validate=LoginFormValidations.validatePassword, ());
+  let username = ReactFinalFormHooks.useField(~name="username", ~form=form, ());
+  let password = ReactFinalFormHooks.useField(~name="password", ~form=form, ~validate=LoginFormValidations.validatePassword, ());
 
   let usernameErrorMessage =
     switch (username.meta.touched, username.meta.valid) {
