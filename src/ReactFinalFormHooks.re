@@ -1,11 +1,13 @@
-// TODO: For now, we're just passing this through from useForm to useField as a JS object, so there's no type safety if the caller uses it directly.
-// A better way to handle this is:
-//
-//    1. Create a `form` record type with a jsConverter annotation
-//    2. Add all fields to this record type
-//    3. Pass this record object out to the caller by converting it to/from JS at the boundaries
-//
-// #2 has to be implemented fully for this to work so that useField gets the right object properties.
+/*
+TODO: For now, we're just passing this through from useForm to useField as a JS object, so there's no type safety if the caller uses it directly.
+A better way to handle this is:
+
+  1. Create a `form` record type with a jsConverter annotation
+  2. Add all fields to this record type
+  3. Pass this record object out to the caller by converting it to/from JS at the boundaries
+
+#2 has to be implemented fully for this to work so that useField gets the right object properties.
+*/
 type rffForm = Js.t({
   .
 });
@@ -16,7 +18,7 @@ type rffUseFormOptions = Js.t({
   onSubmit: option(Js.Dict.t(string)) => unit,
 });
 
-// TODO: Add all form render props
+/* TODO: Add all form render props */
 type rffFormRenderProps = Js.t({
   .
   pristine: bool,
@@ -28,7 +30,7 @@ type rffFormRenderProps = Js.t({
 
 [@bs.module "react-final-form-hooks"] external rffUseForm : rffUseFormOptions => rffFormRenderProps = "useForm";
 
-// TODO: Add all form render props
+/* TODO: Add all form render props */
 [@bs.deriving jsConverter]
 type formRenderProps = {
   pristine: bool,
@@ -45,7 +47,7 @@ let useForm = (~onSubmit, ~validate=?, ()) => {
     }];
 
     let renderProps = rffUseForm(options);
-    // Js.log(renderProps);
+    /* Js.log(renderProps); */
     formRenderPropsFromJs(renderProps);
 };
 
@@ -58,7 +60,7 @@ type rffFieldInputRenderProps = Js.t({
   onFocus: ReactEvent.Focus.t => unit
 })
 
-// TODO: Add all field meta props
+/* TODO: Add all field meta props */
 type rffFieldMetaRenderProps = Js.t({
   .
   touched: bool,
@@ -84,7 +86,7 @@ type fieldInputRenderProps = {
   onFocus: ReactEvent.Focus.t => unit
 };
 
-// TODO: Add all field meta props
+/* TODO: Add all field meta props */
 [@bs.deriving jsConverter]
 type fieldMetaRenderProps = {
   touched: bool,
@@ -98,7 +100,7 @@ type fieldRenderProps = {
 
 let useField = (~name, ~form, ~validate=?, ()) => {
   let renderProps = rffUseField(name, form, validate);
-  // Js.log(renderProps);
+  /* Js.log(renderProps); */
 
   {
     input: fieldInputRenderPropsFromJs(renderProps##input),
