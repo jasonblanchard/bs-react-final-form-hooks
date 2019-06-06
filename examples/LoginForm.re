@@ -14,18 +14,18 @@ let make = () => {
 
   let { ReactFinalFormHooks.pristine, handleSubmit, form, valid } = ReactFinalFormHooks.useForm(~onSubmit=onSubmit, ~validate=LoginFormValidations.validate, ());
 
-  let username = ReactFinalFormHooks.useField(~name="username", ~form=form, ());
-  let password = ReactFinalFormHooks.useField(~name="password", ~form=form, ~validate=LoginFormValidations.validatePassword, ());
+  let usernameField = ReactFinalFormHooks.useField(~name="username", ~form=form, ());
+  let passwordField = ReactFinalFormHooks.useField(~name="password", ~form=form, ~validate=LoginFormValidations.validatePassword, ());
 
   let usernameErrorMessage =
-    switch (username.meta.touched, username.meta.valid) {
+    switch (usernameField.meta.touched, usernameField.meta.valid) {
     | (true, false) => ReasonReact.string("Need to supply username")
     | (false, _) => ReasonReact.null
     | (true, true) => ReasonReact.null
   };
 
   let passwordErrorMessage =
-    switch (password.meta.touched, password.meta.valid) {
+    switch (passwordField.meta.touched, passwordField.meta.valid) {
     | (true, false) => ReasonReact.string("Need to supply password")
     | (false, _) => ReasonReact.null
     | (true, true) => ReasonReact.null
@@ -39,33 +39,33 @@ let make = () => {
 
   <form onSubmit={handleSubmit}>
     <div>
-      <label htmlFor={username.input.name}>
+      <label htmlFor={usernameField.input.name}>
         {usernameErrorMessage}
         <br />
         {ReasonReact.string("Username")}
       </label>
       <input
-        name={username.input.name}
-        value={username.input.value}
-        onChange={username.input.onChange}
-        onBlur={username.input.onBlur}
-        onFocus={username.input.onFocus}
-        id={username.input.name}
+        name={usernameField.input.name}
+        value={usernameField.input.value}
+        onChange={usernameField.input.onChange}
+        onBlur={usernameField.input.onBlur}
+        onFocus={usernameField.input.onFocus}
+        id={usernameField.input.name}
       />
     </div>
     <div>
-      <label htmlFor={password.input.name}>
+      <label htmlFor={passwordField.input.name}>
         {passwordErrorMessage}
         <br />
         {ReasonReact.string("password")}
       </label>
       <input
-        name={password.input.name}
-        value={password.input.value}
-        onChange={password.input.onChange}
-        onBlur={password.input.onBlur}
-        onFocus={password.input.onFocus}
-        id={password.input.name}
+        name={passwordField.input.name}
+        value={passwordField.input.value}
+        onChange={passwordField.input.onChange}
+        onBlur={passwordField.input.onBlur}
+        onFocus={passwordField.input.onFocus}
+        id={passwordField.input.name}
         type_="password"
       />
     </div>
