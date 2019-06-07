@@ -1,13 +1,11 @@
 {
-  "name": "example",
-  "version": "0.1.0",
+  "name": "bs-react-final-form-hooks",
+  "version": "0.0.1",
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack -w",
-    "webpack:production": "NODE_ENV=production webpack",
     "server": "webpack-dev-server",
     "format": "refmt --in-place src/*.re examples/*.re"
   },

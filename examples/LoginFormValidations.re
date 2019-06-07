@@ -2,18 +2,18 @@
 let validate = fields => {
   let results = Js.Dict.empty();
 
-  switch (Js.Dict.get(fields, "username")) {
+  switch (Js.Dict.get(fields, "firstName")) {
   | None
-  | Some("") => Js.Dict.set(results, "username", "Username can't be empty")
+  | Some("") => Js.Dict.set(results, "firstName", "First Name can't be empty")
   | Some(_) => ()
   };
 
   results;
 };
 
-let validatePassword = password =>
-  switch (password) {
+let validateLastName = lastName =>
+  switch (lastName) {
   | None
-  | Some("") => Some("Password can't be empty")
+  | Some("") => Some("Last Name can't be empty")
   | Some(_) => None
   };
