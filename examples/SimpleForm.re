@@ -79,6 +79,6 @@ let make = () => {
         id={lastNameField.input.name}
       />
     </div>
-    <button disabled> {ReasonReact.string("login")} </button>
+    <button disabled> {ReasonReact.string("submit")} </button>
   </form>;
 };

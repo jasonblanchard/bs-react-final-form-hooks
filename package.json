@@ -5,7 +5,8 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cypress run",
+    "cypress:open": "cypress open",
     "server": "webpack-dev-server",
     "format": "refmt --in-place src/*.re examples/*.re"
   },
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "bs-platform": "^5.0.4",
+    "cypress": "^3.3.1",
     "final-form": "^4.13.1",
     "html-webpack-plugin": "^3.2.0",
     "react-final-form": "^6.0.1",
