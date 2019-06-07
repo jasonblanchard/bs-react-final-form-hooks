@@ -101,7 +101,7 @@ type fieldRenderProps = {
 
 let useField = (~name, ~form, ~validate=?, ()) => {
   let renderProps = rffUseField(name, form, validate);
-  Js.log(renderProps);
+  /* Js.log(renderProps); */
 
   {
     input: fieldInputRenderPropsFromJs(renderProps##input),
