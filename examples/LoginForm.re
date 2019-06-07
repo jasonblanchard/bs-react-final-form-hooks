@@ -29,14 +29,14 @@ let make = () => {
 
   let usernameErrorMessage =
     switch (usernameField.meta.touched, usernameField.meta.valid) {
-    | (true, false) => ReasonReact.string("Need to supply username")
+    | (true, false) => ReasonReact.string(usernameField.meta.error)
     | (false, _) => ReasonReact.null
     | (true, true) => ReasonReact.null
     };
 
   let passwordErrorMessage =
     switch (passwordField.meta.touched, passwordField.meta.valid) {
-    | (true, false) => ReasonReact.string("Need to supply password")
+    | (true, false) => ReasonReact.string(passwordField.meta.error)
     | (false, _) => ReasonReact.null
     | (true, true) => ReasonReact.null
     };

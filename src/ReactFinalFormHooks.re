@@ -61,6 +61,7 @@ type rffFieldMetaRenderProps = {
   .
   "touched": bool,
   "valid": bool,
+  "error": string
 };
 
 type rffFieldRenderProps = {
@@ -90,6 +91,7 @@ type fieldInputRenderProps = {
 type fieldMetaRenderProps = {
   touched: bool,
   valid: bool,
+  error: string
 };
 
 type fieldRenderProps = {
@@ -99,7 +101,7 @@ type fieldRenderProps = {
 
 let useField = (~name, ~form, ~validate=?, ()) => {
   let renderProps = rffUseField(name, form, validate);
-  /* Js.log(renderProps); */
+  Js.log(renderProps);
 
   {
     input: fieldInputRenderPropsFromJs(renderProps##input),

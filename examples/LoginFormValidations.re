@@ -4,7 +4,7 @@ let validate = fields => {
 
   switch (Js.Dict.get(fields, "username")) {
   | None
-  | Some("") => Js.Dict.set(results, "username", "Can't be empty")
+  | Some("") => Js.Dict.set(results, "username", "Username can't be empty")
   | Some(_) => ()
   };
 
@@ -14,6 +14,6 @@ let validate = fields => {
 let validatePassword = password =>
   switch (password) {
   | None
-  | Some("") => Some("Password Can't be empty")
+  | Some("") => Some("Password can't be empty")
   | Some(_) => None
   };
