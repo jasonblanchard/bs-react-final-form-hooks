@@ -9,7 +9,7 @@
     "webpack": "webpack -w",
     "webpack:production": "NODE_ENV=production webpack",
     "server": "webpack-dev-server",
-    "format": "refmt --in-place src/*.re"
+    "format": "refmt --in-place src/*.re examples/*.re"
   },
   "keywords": [
     "BuckleScript"
