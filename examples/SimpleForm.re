@@ -88,6 +88,7 @@ let make = () => {
       </div>
       <button disabled> {ReasonReact.string("submit")} </button>
     </form>
+    <hr />
     <div>
       <h3>{ReasonReact.string("First Name Field Props")}</h3>
       {ReasonReact.string(firstNameFieldStringified)}
