@@ -1,5 +1,5 @@
 {
-  "name": "bs-react-final-form-hooks",
+  "name": "@jasonblanchard/bs-react-final-form-hooks",
   "version": "0.0.1",
   "scripts": {
     "build": "bsb -make-world",
