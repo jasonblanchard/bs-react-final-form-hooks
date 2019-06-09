@@ -1,5 +1,5 @@
 it('Input and submit', () => {
-  cy.visit('/');
+  cy.visit('/simple');
   
   cy.get("input[name='firstName']").type('Gob');
   cy.get("input[name='lastName']").type('Bluth');
@@ -7,7 +7,7 @@ it('Input and submit', () => {
 });
 
 it('Validates after touch', () => {
-  cy.visit('/');
+  cy.visit('/simple');
   cy.contains("First Name can't be empty").should('not.exist');
   cy.contains("Last Name can't be empty").should('not.exist');
   
