@@ -3,7 +3,7 @@
 .bsb.lock
 npm-debug.log
 /lib/bs/
+/lib/js/examples/
 /node_modules/
-*.bs.js
 cypress/screenshots
 cypress/videos
