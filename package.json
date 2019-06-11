@@ -15,7 +15,7 @@
   ],
   "author": "",
   "license": "MIT",
-  "main": "lib/js/ReactFinalFormHooks.bs.js",
+  "main": "lib/js/src/ReactFinalFormHooks.bs.js",
   "peerDependencies": {
     "bs-platform": "^5.0.4",
     "react-final-form-hooks": "^2.0.0",
