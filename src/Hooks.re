@@ -1,24 +1,24 @@
 /* Passing through as Js.t object to preserve state referential identity */
-type form = Js.t({
+type form = {
   .
-  batch: [@bs.meth] unit => unit,
-  blur: [@bs.meth] unit => unit,
-  change: [@bs.meth] unit => unit,
-  focus: [@bs.meth] unit => unit,
-  getFieldState: string => option(string),
-  getRegisteredFields: [@bs.meth] unit => unit,
-  getState: [@bs.meth] unit => unit,
-  initialize: [@bs.meth] unit => unit,
-  isValidationPaused: [@bs.meth] unit => unit,
-  mutators: Js.t({.}),
-  pauseValidation: [@bs.meth] unit => unit,
-  registerField: [@bs.meth] unit => unit,
-  reset: [@bs.meth] option(Js.t({.})) => unit,
-  resumeValidation: [@bs.meth] unit => unit,
-  setConfig: [@bs.meth] unit => unit,
-  submit: [@bs.meth] unit => unit,
-  subscribe: [@bs.meth] unit => unit
-});
+  "batch": [@bs.meth] (unit => unit),
+  "blur": [@bs.meth] (unit => unit),
+  "change": [@bs.meth] (unit => unit),
+  "focus": [@bs.meth] (unit => unit),
+  "getFieldState": string => option(string),
+  "getRegisteredFields": [@bs.meth] (unit => unit),
+  "getState": [@bs.meth] (unit => unit),
+  "initialize": [@bs.meth] (unit => unit),
+  "isValidationPaused": [@bs.meth] (unit => unit),
+  "mutators": Js.t({.}),
+  "pauseValidation": [@bs.meth] (unit => unit),
+  "registerField": [@bs.meth] (unit => unit),
+  "reset": [@bs.meth] (option(Js.t({.})) => unit),
+  "resumeValidation": [@bs.meth] (unit => unit),
+  "setConfig": [@bs.meth] (unit => unit),
+  "submit": [@bs.meth] (unit => unit),
+  "subscribe": [@bs.meth] (unit => unit),
+};
 
 type rffUseFormOptions = {
   .
@@ -45,7 +45,7 @@ type formRenderProps = {
   pristine: bool,
   handleSubmit: ReactEvent.Form.t => unit,
   submitting: bool,
-  form: form,
+  form,
   valid: bool,
 };
 
@@ -71,7 +71,7 @@ type rffFieldMetaRenderProps = {
   .
   "touched": bool,
   "valid": bool,
-  "error": string
+  "error": string,
 };
 
 type rffFieldRenderProps = {
@@ -83,10 +83,8 @@ type rffFieldRenderProps = {
 type rffFieldValidateFn = option(option(string) => option(string));
 
 [@bs.module "react-final-form-hooks"]
-external rffUseField:
-  (string, form, rffFieldValidateFn) => rffFieldRenderProps =
+external rffUseField: (string, form, rffFieldValidateFn) => rffFieldRenderProps =
   "useField";
-
 
 [@bs.deriving jsConverter]
 type fieldInputRenderProps = {
@@ -102,7 +100,7 @@ type fieldInputRenderProps = {
 type fieldMetaRenderProps = {
   touched: bool,
   valid: bool,
-  error: string
+  error: string,
 };
 
 type fieldRenderProps = {

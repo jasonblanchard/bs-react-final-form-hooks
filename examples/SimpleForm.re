@@ -11,16 +11,11 @@ let make = () => {
     };
 
   let formProps =
-    Hooks.useForm(
-      ~onSubmit,
-      ~validate=LoginFormValidations.validate,
-      (),
-    );
-  
+    Hooks.useForm(~onSubmit, ~validate=LoginFormValidations.validate, ());
+
   let {Hooks.pristine, handleSubmit, form, valid} = formProps;
 
-  let firstNameField =
-    Hooks.useField(~name="firstName", ~form, ());
+  let firstNameField = Hooks.useField(~name="firstName", ~form, ());
   let lastNameField =
     Hooks.useField(
       ~name="lastName",
@@ -50,8 +45,10 @@ let make = () => {
     | (_, false) => true
     };
 
-  let firstNameFieldStringified = FormPropsHelper.stringifyField(firstNameField);
-  let lastNameFieldStringified = FormPropsHelper.stringifyField(lastNameField);
+  let firstNameFieldStringified =
+    FormPropsHelper.stringifyField(firstNameField);
+  let lastNameFieldStringified =
+    FormPropsHelper.stringifyField(lastNameField);
   let formPropsStringified = FormPropsHelper.stringifyForm(formProps);
 
   <div>
@@ -90,15 +87,15 @@ let make = () => {
     </form>
     <hr />
     <div>
-      <h3>{ReasonReact.string("First Name Field Props")}</h3>
+      <h3> {ReasonReact.string("First Name Field Props")} </h3>
       {ReasonReact.string(firstNameFieldStringified)}
     </div>
     <div>
-      <h3>{ReasonReact.string("Last Name Field Props")}</h3>
+      <h3> {ReasonReact.string("Last Name Field Props")} </h3>
       {ReasonReact.string(lastNameFieldStringified)}
     </div>
     <div>
-      <h3>{ReasonReact.string("Form Props")}</h3>
+      <h3> {ReasonReact.string("Form Props")} </h3>
       {ReasonReact.string(formPropsStringified)}
     </div>
   </div>;
