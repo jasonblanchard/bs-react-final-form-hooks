@@ -4,7 +4,13 @@
   "reason": {
     "react-jsx": 3
   },
-  "sources": ["examples", "src"],
+  "sources": [
+    "src",
+    {
+        "dir": "examples",
+        "type": "dev"
+    }
+      ],
   "package-specs": [{
     "module": "commonjs"
   }],
