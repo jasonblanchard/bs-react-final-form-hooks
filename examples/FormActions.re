@@ -56,7 +56,7 @@ let make = () => {
         />
       </div>
       <button disabled> {ReasonReact.string("submit")} </button>
-      <button onClick={(_) => { form.reset(None) }}>{ReasonReact.string("reset")}</button>
+      <button onClick={(_) => { form##reset(None) }}>{ReasonReact.string("reset")}</button>
     </form>
     <hr />
     <div>
