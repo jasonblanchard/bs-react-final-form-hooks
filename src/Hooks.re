@@ -1,4 +1,4 @@
-/* Passing through as Js.t object to preserve state referential identity */
+/* Passing through as Js.t object to preserve state referential equality */
 type form = {
   .
   "batch": [@bs.meth] (unit => unit),
