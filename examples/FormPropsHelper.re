@@ -1,6 +1,6 @@
-let stringifyField = (fieldProps: ReactFinalFormHooks.fieldRenderProps) => {
-  let inputJs = ReactFinalFormHooks.fieldInputRenderPropsToJs(fieldProps.input);
-  let metaJs = ReactFinalFormHooks.fieldMetaRenderPropsToJs(fieldProps.meta);
+let stringifyField = (fieldProps: Hooks.fieldRenderProps) => {
+  let inputJs = Hooks.fieldInputRenderPropsToJs(fieldProps.input);
+  let metaJs = Hooks.fieldMetaRenderPropsToJs(fieldProps.meta);
   let fieldJs = {
     "input": inputJs,
     "meta": metaJs
@@ -13,8 +13,8 @@ let stringifyField = (fieldProps: ReactFinalFormHooks.fieldRenderProps) => {
   };
 }
 
-let stringifyForm = (formProps: ReactFinalFormHooks.formRenderProps) => {
-  let formJs = ReactFinalFormHooks.formRenderPropsToJs(formProps);
+let stringifyForm = (formProps: Hooks.formRenderProps) => {
+  let formJs = Hooks.formRenderPropsToJs(formProps);
 
   let stringified = Js.Json.stringifyAny(formJs);
 

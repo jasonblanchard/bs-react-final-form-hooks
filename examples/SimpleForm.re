@@ -11,18 +11,18 @@ let make = () => {
     };
 
   let formProps =
-    ReactFinalFormHooks.useForm(
+    Hooks.useForm(
       ~onSubmit,
       ~validate=LoginFormValidations.validate,
       (),
     );
   
-  let {ReactFinalFormHooks.pristine, handleSubmit, form, valid} = formProps;
+  let {Hooks.pristine, handleSubmit, form, valid} = formProps;
 
   let firstNameField =
-    ReactFinalFormHooks.useField(~name="firstName", ~form, ());
+    Hooks.useField(~name="firstName", ~form, ());
   let lastNameField =
-    ReactFinalFormHooks.useField(
+    Hooks.useField(
       ~name="lastName",
       ~form,
       ~validate=LoginFormValidations.validateLastName,

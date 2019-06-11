@@ -8,6 +8,7 @@
   "package-specs": [{
     "module": "commonjs"
   }],
+  "namespace": "ReactFinalFormHooks",
   "suffix": ".bs.js",
   "bs-dependencies": [
     "reason-react"

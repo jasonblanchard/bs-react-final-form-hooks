@@ -3,18 +3,18 @@ let make = () => {
   let onSubmit = _ => ();
 
   let formProps =
-    ReactFinalFormHooks.useForm(
+    Hooks.useForm(
       ~onSubmit,
       ~validate=LoginFormValidations.validate,
       (),
     );
   
-  let {ReactFinalFormHooks.pristine, handleSubmit, form, valid} = formProps;
+  let {Hooks.pristine, handleSubmit, form, valid} = formProps;
 
   let firstNameField =
-    ReactFinalFormHooks.useField(~name="firstName", ~form, ());
+    Hooks.useField(~name="firstName", ~form, ());
   let lastNameField =
-    ReactFinalFormHooks.useField(~name="lastName", ~form, ());
+    Hooks.useField(~name="lastName", ~form, ());
 
   let disabled =
     switch (pristine, valid) {
