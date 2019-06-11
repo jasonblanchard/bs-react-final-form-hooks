@@ -9,7 +9,6 @@
     "module": "commonjs"
   }],
   "suffix": ".bs.js",
-  "namespace": true,
   "bs-dependencies": [
     "reason-react"
   ],
