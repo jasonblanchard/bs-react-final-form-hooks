@@ -10,6 +10,10 @@
     "server": "webpack-dev-server",
     "format": "refmt --in-place src/*.re examples/*.re"
   },
+  "files": [
+    "src",
+    "bsconfig.json"
+  ],
   "keywords": [
     "BuckleScript"
   ],
