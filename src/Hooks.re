@@ -8,7 +8,7 @@ type form = {
   "getFieldState": string => option(string),
   "getRegisteredFields": [@bs.meth] (unit => unit),
   "getState": [@bs.meth] (unit => unit),
-  "initialize": [@bs.meth] (unit => unit),
+  "initialize": [@bs.meth] (Js.Dict.t(string) => unit),
   "isValidationPaused": [@bs.meth] (unit => unit),
   "mutators": Js.t({.}),
   "pauseValidation": [@bs.meth] (unit => unit),

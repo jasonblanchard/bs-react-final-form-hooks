@@ -1,3 +1,7 @@
+let initialValues = Js.Dict.empty();
+Js.Dict.set(initialValues, "firstName", "gob");
+Js.Dict.set(initialValues, "lastName", "bluth");
+
 [@bs.deriving jsConverter]
 type state = {
   submittedFirstName: string,
@@ -98,6 +102,7 @@ let make = () => {
       <button onClick={_ => form##reset(None)}>
         {ReasonReact.string("reset")}
       </button>
+      <button onClick={_ => form##initialize(initialValues)} >{ReasonReact.string("initialize")}</button>
     </form>
     <hr />
     <div className="firstNameProps">

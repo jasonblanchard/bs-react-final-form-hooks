@@ -101,3 +101,11 @@ it('form##submit', () => {
       expect(data.submittedLastName).to.equal('Bluth');
     }); 
 });
+
+it('form#initialize', () => {
+  cy.visit('/actions');
+  cy.contains("initialize").click();
+  cy.wait(100);
+  cy.get("input[name='firstName']").should('have.value', 'gob');
+  cy.get("input[name='lastName']").should('have.value', 'bluth');
+});
