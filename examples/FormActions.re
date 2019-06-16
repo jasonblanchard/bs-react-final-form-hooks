@@ -7,8 +7,8 @@ let make = () => {
 
   let {Hooks.pristine, handleSubmit, form, valid} = formProps;
 
-  let firstNameField = Hooks.useField(~name="firstName", ~form, ());
-  let lastNameField = Hooks.useField(~name="lastName", ~form, ());
+  let firstNameField = Hooks.useField(~name="firstName", ~form, ~validate=LoginFormValidations.validateFirstName, ());
+  let lastNameField = Hooks.useField(~name="lastName", ~form, ~validate=LoginFormValidations.validateLastName, ());
 
   let disabled =
     switch (pristine, valid) {
@@ -57,17 +57,23 @@ let make = () => {
       </button>
     </form>
     <hr />
-    <div>
+    <div className="firstNameProps">
       <h3> {ReasonReact.string("First Name Field Props")} </h3>
-      {ReasonReact.string(firstNameFieldStringified)}
+      <div className="data">
+        {ReasonReact.string(firstNameFieldStringified)}
+      </div>
     </div>
-    <div>
+    <div className="lastNameProps">
       <h3> {ReasonReact.string("Last Name Field Props")} </h3>
-      {ReasonReact.string(lastNameFieldStringified)}
+      <div className="data">
+        {ReasonReact.string(lastNameFieldStringified)}
+      </div>
     </div>
-    <div>
+    <div className="formProps">
       <h3> {ReasonReact.string("Form Props")} </h3>
-      {ReasonReact.string(formPropsStringified)}
+      <div className="data">
+        {ReasonReact.string(formPropsStringified)}
+      </div>
     </div>
   </div>;
 };

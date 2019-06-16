@@ -11,6 +11,13 @@ let validate = fields => {
   results;
 };
 
+let validateFirstName = firstName =>
+  switch (firstName) {
+  | None
+  | Some("") => Some("First name can't be empty")
+  | Some(_) => None
+  };
+
 let validateLastName = lastName =>
   switch (lastName) {
   | None

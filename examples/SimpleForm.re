@@ -1,6 +1,5 @@
 [@react.component]
 let make = () => {
-  /* TODO: Figure out how to use a record instead of Js.Dict for `values`. */
   let onSubmit = values =>
     switch (values) {
     | None => Js.log("Invalid")
@@ -86,17 +85,23 @@ let make = () => {
       <button disabled> {ReasonReact.string("submit")} </button>
     </form>
     <hr />
-    <div>
+    <div className="firstNameProps">
       <h3> {ReasonReact.string("First Name Field Props")} </h3>
-      {ReasonReact.string(firstNameFieldStringified)}
+      <div className="data">
+        {ReasonReact.string(firstNameFieldStringified)}
+      </div>
     </div>
-    <div>
+    <div className="lastNameProps">
       <h3> {ReasonReact.string("Last Name Field Props")} </h3>
-      {ReasonReact.string(lastNameFieldStringified)}
+      <div className="data">
+        {ReasonReact.string(lastNameFieldStringified)}
+      </div>
     </div>
-    <div>
+    <div className="formProps">
       <h3> {ReasonReact.string("Form Props")} </h3>
-      {ReasonReact.string(formPropsStringified)}
+      <div className="data">
+        {ReasonReact.string(formPropsStringified)}
+      </div>
     </div>
   </div>;
 };

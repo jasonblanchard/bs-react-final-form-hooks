@@ -21,7 +21,4 @@ it('Validates after touch', () => {
   cy.get("input[name='lastName']").blur();
   cy.contains("Last Name can't be empty");
   cy.contains("submit").should('be.disabled');
-
-  cy.contains("Form Props").parent().contains('"pristine":false');
-  cy.contains("Form Props").parent().contains('"valid":false');
 });
