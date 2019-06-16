@@ -10,7 +10,7 @@ type state = {
 
 type submitPayload = {
   firstName: string,
-  lastName: string
+  lastName: string,
 };
 
 type action =
@@ -18,38 +18,56 @@ type action =
 
 [@react.component]
 let make = () => {
-  let (state, dispatch) = React.useReducer((state, action) => 
-    switch (action) {
-  | Submit(payload) => {submittedFirstName: payload.firstName, submittedLastName: payload.lastName}
-  }, {submittedFirstName: "", submittedLastName: "" });
+  let (state, dispatch) =
+    React.useReducer(
+      (_, action) =>
+        switch (action) {
+        | Submit(payload) => {
+            submittedFirstName: payload.firstName,
+            submittedLastName: payload.lastName,
+          }
+        },
+      {submittedFirstName: "", submittedLastName: ""},
+    );
 
   let onSubmit = values =>
     switch (values) {
-      | None => ()
-      | Some(data) => 
-        let firstName = switch (Js.Dict.get(data, "firstName")) {
-          | Some(s) => s
-          | None => ""
+    | None => ()
+    | Some(data) =>
+      let firstName =
+        switch (Js.Dict.get(data, "firstName")) {
+        | Some(s) => s
+        | None => ""
         };
 
-        let lastName = switch (Js.Dict.get(data, "lastName")) {
-          | Some(s) => s
-          | None => ""
+      let lastName =
+        switch (Js.Dict.get(data, "lastName")) {
+        | Some(s) => s
+        | None => ""
         };
 
-        dispatch(Submit({
-          firstName,
-          lastName
-        }));
-      };
+      dispatch(Submit({firstName, lastName}));
+    };
 
   let formProps =
     Hooks.useForm(~onSubmit, ~validate=LoginFormValidations.validate, ());
 
   let {Hooks.pristine, handleSubmit, form, valid} = formProps;
 
-  let firstNameField = Hooks.useField(~name="firstName", ~form, ~validate=LoginFormValidations.validateFirstName, ());
-  let lastNameField = Hooks.useField(~name="lastName", ~form, ~validate=LoginFormValidations.validateLastName, ());
+  let firstNameField =
+    Hooks.useField(
+      ~name="firstName",
+      ~form,
+      ~validate=LoginFormValidations.validateFirstName,
+      (),
+    );
+  let lastNameField =
+    Hooks.useField(
+      ~name="lastName",
+      ~form,
+      ~validate=LoginFormValidations.validateLastName,
+      (),
+    );
 
   let disabled =
     switch (pristine, valid) {
@@ -66,8 +84,8 @@ let make = () => {
 
   let stateStringified =
     switch (Js.Json.stringifyAny(stateToJs(state))) {
-      | Some(s) => s
-      | None => ""
+    | Some(s) => s
+    | None => ""
     };
 
   <div>
@@ -102,7 +120,9 @@ let make = () => {
       <button onClick={_ => form##reset(None)}>
         {ReasonReact.string("reset")}
       </button>
-      <button onClick={_ => form##initialize(initialValues)} >{ReasonReact.string("initialize")}</button>
+      <button onClick={_ => form##initialize(initialValues)}>
+        {ReasonReact.string("initialize")}
+      </button>
     </form>
     <hr />
     <div className="firstNameProps">
@@ -119,15 +139,11 @@ let make = () => {
     </div>
     <div className="formProps">
       <h3> {ReasonReact.string("Form Props")} </h3>
-      <div className="data">
-        {ReasonReact.string(formPropsStringified)}
-      </div>
+      <div className="data"> {ReasonReact.string(formPropsStringified)} </div>
     </div>
     <div className="state">
-      <h3>{ReasonReact.string("State")}</h3>
-      <div className="data">
-        {ReasonReact.string(stateStringified)}
-      </div>
+      <h3> {ReasonReact.string("State")} </h3>
+      <div className="data"> {ReasonReact.string(stateStringified)} </div>
     </div>
   </div>;
 };

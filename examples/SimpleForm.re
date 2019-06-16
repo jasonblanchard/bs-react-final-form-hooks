@@ -99,9 +99,7 @@ let make = () => {
     </div>
     <div className="formProps">
       <h3> {ReasonReact.string("Form Props")} </h3>
-      <div className="data">
-        {ReasonReact.string(formPropsStringified)}
-      </div>
+      <div className="data"> {ReasonReact.string(formPropsStringified)} </div>
     </div>
   </div>;
 };
