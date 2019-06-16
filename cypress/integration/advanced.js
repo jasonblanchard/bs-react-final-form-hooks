@@ -8,7 +8,7 @@ function getData(selector) {
 }
 
 it('untouched', () => {
-  cy.visit('/actions');
+  cy.visit('/advanced');
   cy.wait(100); // Let the form initialize. Possible race condition.
 
   return getData('.firstNameProps')
@@ -34,7 +34,7 @@ it('untouched', () => {
 });
 
 it('touch and validation', () => {
-  cy.visit('/actions');
+  cy.visit('/advanced');
 
   cy.get("input[name='firstName']").type('Gob');
   cy.get("input[name='lastName']").type('Bluth');
@@ -78,7 +78,7 @@ it('touch and validation', () => {
 });
 
 it('form##reset', () => {
-  cy.visit('/actions');
+  cy.visit('/advanced');
   cy.get("input[name='firstName']").type('Gob');
   cy.get("input[name='lastName']").type('Bluth');
 
@@ -90,7 +90,7 @@ it('form##reset', () => {
 });
 
 it('form##submit', () => {
-  cy.visit('/actions');
+  cy.visit('/advanced');
   cy.get("input[name='firstName']").type('Gob');
   cy.get("input[name='lastName']").type('Bluth');
   cy.contains("submit").click();
@@ -103,7 +103,7 @@ it('form##submit', () => {
 });
 
 it('form#initialize', () => {
-  cy.visit('/actions');
+  cy.visit('/advanced');
   cy.contains("initialize").click();
   cy.wait(100);
   cy.get("input[name='firstName']").should('have.value', 'gob');

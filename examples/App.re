@@ -9,10 +9,10 @@ let make = () => {
         <h2> {ReasonReact.string("Simple Form")} </h2>
         <SimpleForm />
       </div>
-    | ["actions"] =>
+    | ["advanced"] =>
       <div>
         <h2> {ReasonReact.string("Form Actions")} </h2>
-        <FormActions />
+        <Advanced />
       </div>
     | _ => <div> {ReasonReact.string("404")} </div>
     };
