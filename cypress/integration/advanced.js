@@ -7,16 +7,30 @@ function getData(selector) {
   });
 }
 
-it('form##reset', () => {
+it('untouched', () => {
   cy.visit('/actions');
-  cy.get("input[name='firstName']").type('Gob');
-  cy.get("input[name='lastName']").type('Bluth');
+  cy.wait(100); // Let the form initialize. Possible race condition.
 
-  cy.contains('Gob');
-  cy.contains('Bluth');
-  cy.contains("reset").click();
-  cy.contains('Gob').should('not.exist');
-  cy.contains('Bluth').should('not.exist');
+  return getData('.firstNameProps')
+    .then(data => {
+      const meta = data.meta;
+      const { active, dirty, error, invalid, modified, pristine, touched, valid, visited } = meta;
+      expect(active).to.equal(false);
+      expect(dirty).to.equal(false);
+      expect(error).to.equal("First name can't be empty");
+      expect(invalid).to.equal(true);
+      expect(modified).to.equal(false);
+      expect(pristine).to.equal(true);
+      expect(touched).to.equal(false);
+      expect(valid).to.equal(false);
+      expect(visited).to.equal(false);
+      
+      return getData('.formProps');
+    }).then(data => {
+      const { valid, pristine } = data;
+      expect(valid).to.equal(false);
+      expect(pristine).to.equal(true);
+    });
 });
 
 it('touch and validation', () => {
@@ -63,28 +77,27 @@ it('touch and validation', () => {
     });
 });
 
-it('untouched', () => {
+it('form##reset', () => {
   cy.visit('/actions');
-  cy.wait(100); // Let the form initialize. Possible race condition.
+  cy.get("input[name='firstName']").type('Gob');
+  cy.get("input[name='lastName']").type('Bluth');
 
-  return getData('.firstNameProps')
+  cy.contains('Gob');
+  cy.contains('Bluth');
+  cy.contains("reset").click();
+  cy.contains('Gob').should('not.exist');
+  cy.contains('Bluth').should('not.exist');
+});
+
+it('form##submit', () => {
+  cy.visit('/actions');
+  cy.get("input[name='firstName']").type('Gob');
+  cy.get("input[name='lastName']").type('Bluth');
+  cy.contains("submit").click();
+
+  return getData('.state')
     .then(data => {
-      const meta = data.meta;
-      const { active, dirty, error, invalid, modified, pristine, touched, valid, visited } = meta;
-      expect(active).to.equal(false);
-      expect(dirty).to.equal(false);
-      expect(error).to.equal("First name can't be empty");
-      expect(invalid).to.equal(true);
-      expect(modified).to.equal(false);
-      expect(pristine).to.equal(true);
-      expect(touched).to.equal(false);
-      expect(valid).to.equal(false);
-      expect(visited).to.equal(false);
-      
-      return getData('.formProps');
-    }).then(data => {
-      const { valid, pristine } = data;
-      expect(valid).to.equal(false);
-      expect(pristine).to.equal(true);
-    });
+      expect(data.submittedFirstName).to.equal('Gob');
+      expect(data.submittedLastName).to.equal('Bluth');
+    }); 
 });

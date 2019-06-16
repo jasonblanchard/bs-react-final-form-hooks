@@ -1,6 +1,43 @@
+[@bs.deriving jsConverter]
+type state = {
+  submittedFirstName: string,
+  submittedLastName: string,
+};
+
+type submitPayload = {
+  firstName: string,
+  lastName: string
+};
+
+type action =
+  | Submit(submitPayload);
+
 [@react.component]
 let make = () => {
-  let onSubmit = _ => ();
+  let (state, dispatch) = React.useReducer((state, action) => 
+    switch (action) {
+  | Submit(payload) => {submittedFirstName: payload.firstName, submittedLastName: payload.lastName}
+  }, {submittedFirstName: "", submittedLastName: "" });
+
+  let onSubmit = values =>
+    switch (values) {
+      | None => ()
+      | Some(data) => 
+        let firstName = switch (Js.Dict.get(data, "firstName")) {
+          | Some(s) => s
+          | None => ""
+        };
+
+        let lastName = switch (Js.Dict.get(data, "lastName")) {
+          | Some(s) => s
+          | None => ""
+        };
+
+        dispatch(Submit({
+          firstName,
+          lastName
+        }));
+      };
 
   let formProps =
     Hooks.useForm(~onSubmit, ~validate=LoginFormValidations.validate, ());
@@ -22,6 +59,12 @@ let make = () => {
   let lastNameFieldStringified =
     FormPropsHelper.stringifyField(lastNameField);
   let formPropsStringified = FormPropsHelper.stringifyForm(formProps);
+
+  let stateStringified =
+    switch (Js.Json.stringifyAny(stateToJs(state))) {
+      | Some(s) => s
+      | None => ""
+    };
 
   <div>
     <form onSubmit=handleSubmit>
@@ -73,6 +116,12 @@ let make = () => {
       <h3> {ReasonReact.string("Form Props")} </h3>
       <div className="data">
         {ReasonReact.string(formPropsStringified)}
+      </div>
+    </div>
+    <div className="state">
+      <h3>{ReasonReact.string("State")}</h3>
+      <div className="data">
+        {ReasonReact.string(stateStringified)}
       </div>
     </div>
   </div>;
