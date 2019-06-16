@@ -66,12 +66,25 @@ type rffFieldInputRenderProps = {
   "onFocus": ReactEvent.Focus.t => unit,
 };
 
-/* TODO: Add all field meta props */
 type rffFieldMetaRenderProps = {
   .
+  "active": bool,
+  "data": Js.Dict.t(string),
+  "dirty": bool,
+  "dirtySinceLastSubmit": bool,
+  "error": string,
+  "initial": option(string),
+  "invalid": bool,
+  "length": option(int),
+  "modified": bool,
+  "pristine": bool,
+  "submitError": option(string),
+  "submitFailed": bool,
+  "submitSucceeded": bool,
+  "submitting": bool,
   "touched": bool,
   "valid": bool,
-  "error": string,
+  "visited": bool
 };
 
 type rffFieldRenderProps = {
@@ -95,12 +108,25 @@ type fieldInputRenderProps = {
   onFocus: ReactEvent.Focus.t => unit,
 };
 
-/* TODO: Add all field meta props */
 [@bs.deriving jsConverter]
 type fieldMetaRenderProps = {
+  active: bool,
+  data: Js.Dict.t(string),
+  dirty: bool,
+  dirtySinceLastSubmit: bool,
+  error: string,
+  initial: option(string),
+  invalid: bool,
+  length: option(int),
+  modified: bool,
+  pristine: bool,
+  submitError: option(string),
+  submitFailed: bool,
+  submitSucceeded: bool,
+  submitting: bool,
   touched: bool,
   valid: bool,
-  error: string,
+  visited: bool
 };
 
 type fieldRenderProps = {
@@ -110,7 +136,7 @@ type fieldRenderProps = {
 
 let useField = (~name, ~form, ~validate=?, ()) => {
   let renderProps = rffUseField(name, form, validate);
-  /* Js.log(renderProps); */
+  // Js.log(renderProps);
 
   {
     input: fieldInputRenderPropsFromJs(renderProps##input),
