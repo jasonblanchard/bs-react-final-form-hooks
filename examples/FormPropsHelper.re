@@ -10,7 +10,7 @@ let stringifyField = (fieldProps: Hooks.fieldRenderProps) => {
   };
 };
 
-let stringifyForm = (formProps: Hooks.formRenderProps) => {
+let stringifyForm = (formProps: Hooks.formRenderProps('a)) => {
   let formJs = Hooks.formRenderPropsToJs(formProps);
 
   let stringified = Js.Json.stringifyAny(formJs);

@@ -1,6 +1,13 @@
-let initialValues = Js.Dict.empty();
-Js.Dict.set(initialValues, "firstName", "gob");
-Js.Dict.set(initialValues, "lastName", "bluth");
+type formData = {
+  .
+  "firstName": option(string),
+  "lastName": option(string)
+};
+
+let initialValues: formData = {
+    "firstName": Some("gob"),
+    "lastName": Some("bluth")
+};
 
 [@bs.deriving jsConverter]
 type state = {
@@ -15,12 +22,6 @@ type submitPayload = {
 
 type action =
   | Submit(submitPayload);
-
-type formData = {
-  .
-  "firstName": option(string),
-  "lastName": option(string)
-};
 
 [@react.component]
 let make = () => {

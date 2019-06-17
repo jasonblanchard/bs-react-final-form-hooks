@@ -1,5 +1,9 @@
+type formFields('a) = Js.t({
+  ..
+}) as 'a;
+
 /* Passing through as Js.t object to preserve state referential equality */
-type form = {
+type form('a) = {
   .
   "batch": [@bs.meth] (unit => unit),
   "blur": [@bs.meth] (unit => unit),
@@ -8,7 +12,7 @@ type form = {
   "getFieldState": string => option(string),
   "getRegisteredFields": [@bs.meth] (unit => unit),
   "getState": [@bs.meth] (unit => unit),
-  "initialize": [@bs.meth] (Js.Dict.t(string) => unit),
+  "initialize": [@bs.meth] (formFields('a) => unit),
   "isValidationPaused": [@bs.meth] (unit => unit),
   "mutators": Js.t({.}),
   "pauseValidation": [@bs.meth] (unit => unit),
@@ -20,10 +24,6 @@ type form = {
   "subscribe": [@bs.meth] (unit => unit),
 };
 
-type formFields('a) = Js.t({
-  ..
-}) as 'a;
-
 type rffUseFormOptions('a) = {
   .
   "validate": option(formFields('a) => formFields('a)),
@@ -31,25 +31,25 @@ type rffUseFormOptions('a) = {
 };
 
 /* TODO: Add all form render props */
-type rffFormRenderProps = {
+type rffFormRenderProps('a) = {
   .
   "pristine": bool,
   "handleSubmit": ReactEvent.Form.t => unit,
   "submitting": bool,
-  "form": form,
+  "form": form('a),
   "valid": bool,
 };
 
 [@bs.module "react-final-form-hooks"]
-external rffUseForm: rffUseFormOptions('a) => rffFormRenderProps = "useForm";
+external rffUseForm: rffUseFormOptions('a) => rffFormRenderProps('a) = "useForm";
 
 /* TODO: Add all form render props */
 [@bs.deriving jsConverter]
-type formRenderProps = {
+type formRenderProps('a) = {
   pristine: bool,
   handleSubmit: ReactEvent.Form.t => unit,
   submitting: bool,
-  form,
+  form: form('a),
   valid: bool,
 };
 
@@ -100,7 +100,7 @@ type rffFieldRenderProps = {
 type rffFieldValidateFn = option(option(string) => option(string));
 
 [@bs.module "react-final-form-hooks"]
-external rffUseField: (string, form, rffFieldValidateFn) => rffFieldRenderProps =
+external rffUseField: (string, form('a), rffFieldValidateFn) => rffFieldRenderProps =
   "useField";
 
 [@bs.deriving jsConverter]
