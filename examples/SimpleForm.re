@@ -1,13 +1,10 @@
 [@react.component]
 let make = () => {
-  let onSubmit = values =>
-    switch (values) {
-    | None => Js.log("Invalid")
-    | Some(values) =>
-      let firstName = Js.Dict.get(values, "firstName");
-      let lastName = Js.Dict.get(values, "lastName");
-      Js.log({j|Called with first name: $firstName, last name: $lastName|j});
-    };
+  let onSubmit = values => {
+    let firstName = values##firstName;
+    let lastName = values##lastName;
+    Js.log({j|Called with first name: $firstName, last name: $lastName|j});
+  };
 
   let formProps =
     Hooks.useForm(~onSubmit, ~validate=LoginFormValidations.validate, ());

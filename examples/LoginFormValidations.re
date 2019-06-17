@@ -1,13 +1,21 @@
-/* TODO: Figure out how to use a record instead of a Js.Dict for this `fields`. */
-let validate = fields => {
-  let results = Js.Dict.empty();
+type formData = {
+  .
+  "firstName": option(string),
+  "lastName": option(string)
+};
 
-  switch (Js.Dict.get(fields, "firstName")) {
+let validate = values: formData => {
+  let firstNameError: option(string) = switch (values##firstName) {
   | None
-  | Some("") => Js.Dict.set(results, "firstName", "First Name can't be empty")
-  | Some(_) => ()
+  | Some("") => Some("First Name can't be empty")
+  | Some(_) => None
   };
 
+  let results = {
+    "firstName": firstNameError,
+    "lastName": None
+  };
+  
   results;
 };
 

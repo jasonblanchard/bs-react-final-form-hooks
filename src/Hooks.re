@@ -20,10 +20,14 @@ type form = {
   "subscribe": [@bs.meth] (unit => unit),
 };
 
-type rffUseFormOptions = {
+type formFields('a) = Js.t({
+  ..
+}) as 'a;
+
+type rffUseFormOptions('a) = {
   .
-  "validate": option(Js.Dict.t(string) => Js.Dict.t(string)),
-  "onSubmit": option(Js.Dict.t(string)) => unit,
+  "validate": option(formFields('a) => formFields('a)),
+  "onSubmit": formFields('a) => unit
 };
 
 /* TODO: Add all form render props */
@@ -37,7 +41,7 @@ type rffFormRenderProps = {
 };
 
 [@bs.module "react-final-form-hooks"]
-external rffUseForm: rffUseFormOptions => rffFormRenderProps = "useForm";
+external rffUseForm: rffUseFormOptions('a) => rffFormRenderProps = "useForm";
 
 /* TODO: Add all form render props */
 [@bs.deriving jsConverter]

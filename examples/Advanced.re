@@ -4,17 +4,23 @@ Js.Dict.set(initialValues, "lastName", "bluth");
 
 [@bs.deriving jsConverter]
 type state = {
-  submittedFirstName: string,
-  submittedLastName: string,
+  submittedFirstName: option(string),
+  submittedLastName: option(string),
 };
 
 type submitPayload = {
-  firstName: string,
-  lastName: string,
+  firstName: option(string),
+  lastName: option(string),
 };
 
 type action =
   | Submit(submitPayload);
+
+type formData = {
+  .
+  "firstName": option(string),
+  "lastName": option(string)
+};
 
 [@react.component]
 let make = () => {
@@ -27,27 +33,15 @@ let make = () => {
             submittedLastName: payload.lastName,
           }
         },
-      {submittedFirstName: "", submittedLastName: ""},
+      {submittedFirstName: Some(""), submittedLastName: Some("")},
     );
 
-  let onSubmit = values =>
-    switch (values) {
-    | None => ()
-    | Some(data) =>
-      let firstName =
-        switch (Js.Dict.get(data, "firstName")) {
-        | Some(s) => s
-        | None => ""
-        };
-
-      let lastName =
-        switch (Js.Dict.get(data, "lastName")) {
-        | Some(s) => s
-        | None => ""
-        };
-
-      dispatch(Submit({firstName, lastName}));
-    };
+  // TODO: Prevent from compiling if don't supply type?
+  let onSubmit = (values: formData) => {
+    let firstName = values##firstName;
+    let lastName = values##lastName;
+    dispatch(Submit({firstName, lastName}));
+  };
 
   let formProps =
     Hooks.useForm(~onSubmit, ~validate=LoginFormValidations.validate, ());
