@@ -1,21 +1,19 @@
 type formData = {
   .
   "firstName": option(string),
-  "lastName": option(string)
+  "lastName": option(string),
 };
 
 let validate = values: formData => {
-  let firstNameError: option(string) = switch (values##firstName) {
-  | None
-  | Some("") => Some("First Name can't be empty")
-  | Some(_) => None
-  };
+  let firstNameError: option(string) =
+    switch (values##firstName) {
+    | None
+    | Some("") => Some("First Name can't be empty")
+    | Some(_) => None
+    };
 
-  let results = {
-    "firstName": firstNameError,
-    "lastName": None
-  };
-  
+  let results = {"firstName": firstNameError, "lastName": None};
+
   results;
 };
 

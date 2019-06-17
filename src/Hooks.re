@@ -1,6 +1,4 @@
-type formFields('a) = Js.t({
-  ..
-}) as 'a;
+type formFields('a) = Js.t({..}) as 'a;
 
 /* Passing through as Js.t object to preserve state referential equality */
 type form('a) = {
@@ -27,7 +25,7 @@ type form('a) = {
 type rffUseFormOptions('a) = {
   .
   "validate": option(formFields('a) => formFields('a)),
-  "onSubmit": formFields('a) => unit
+  "onSubmit": formFields('a) => unit,
 };
 
 /* TODO: Add all form render props */
@@ -41,7 +39,8 @@ type rffFormRenderProps('a) = {
 };
 
 [@bs.module "react-final-form-hooks"]
-external rffUseForm: rffUseFormOptions('a) => rffFormRenderProps('a) = "useForm";
+external rffUseForm: rffUseFormOptions('a) => rffFormRenderProps('a) =
+  "useForm";
 
 /* TODO: Add all form render props */
 [@bs.deriving jsConverter]
@@ -100,7 +99,8 @@ type rffFieldRenderProps = {
 type rffFieldValidateFn = option(option(string) => option(string));
 
 [@bs.module "react-final-form-hooks"]
-external rffUseField: (string, form('a), rffFieldValidateFn) => rffFieldRenderProps =
+external rffUseField:
+  (string, form('a), rffFieldValidateFn) => rffFieldRenderProps =
   "useField";
 
 [@bs.deriving jsConverter]

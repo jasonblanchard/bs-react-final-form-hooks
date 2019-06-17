@@ -1,12 +1,12 @@
 type formData = {
   .
   "firstName": option(string),
-  "lastName": option(string)
+  "lastName": option(string),
 };
 
 let initialValues: formData = {
-    "firstName": Some("gob"),
-    "lastName": Some("bluth")
+  "firstName": Some("gob"),
+  "lastName": Some("bluth"),
 };
 
 [@bs.deriving jsConverter]
@@ -37,7 +37,7 @@ let make = () => {
       {submittedFirstName: Some(""), submittedLastName: Some("")},
     );
 
-  // TODO: Prevent from compiling if don't supply type?
+  /* TODO: Prevent from compiling if don't supply type? */
   let onSubmit = (values: formData) => {
     let firstName = values##firstName;
     let lastName = values##lastName;
