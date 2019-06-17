@@ -1,8 +1,10 @@
 it('Input and submit', () => {
   cy.visit('/simple');
-  
+  cy.wait(10);
+    
   cy.get("input[name='firstName']").type('Gob');
   cy.get("input[name='lastName']").type('Bluth');
+  cy.get("input[name='lastName']").blur();
   cy.contains("submit").click();
 });
 
