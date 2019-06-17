@@ -28,28 +28,64 @@ type rffUseFormOptions('a) = {
   "onSubmit": formFields('a) => unit,
 };
 
-/* TODO: Add all form render props */
 type rffFormRenderProps('a) = {
   .
-  "pristine": bool,
-  "handleSubmit": ReactEvent.Form.t => unit,
-  "submitting": bool,
+  "active": option(string),
+  "dirty": bool,
+  "dirtyFields": Js.Dict.t(string),
+  "dirtySinceLastSubmit": bool,
+  "error": option(string),
+  "errors": Js.Dict.t(string),
   "form": form('a),
+  "handleSubmit": ReactEvent.Form.t => unit,
+  "hasSubmitErrors": bool,
+  "hasValidationErrors": bool,
+  "initialValues": option(Js.Dict.t(string)),
+  "invalid": bool,
+  "modified": Js.Dict.t(string),
+  "pristine": bool,
+  "submitError": option(string),
+  "submitErrors": Js.Dict.t(string),
+  "submitFailed": bool,
+  "submitSucceeded": bool,
+  "submitting": bool,
+  "touched": Js.Dict.t(string),
   "valid": bool,
+  "validating": bool,
+  "values": Js.Dict.t(string),
+  "visited": Js.Dict.t(string)
 };
 
 [@bs.module "react-final-form-hooks"]
 external rffUseForm: rffUseFormOptions('a) => rffFormRenderProps('a) =
   "useForm";
 
-/* TODO: Add all form render props */
 [@bs.deriving jsConverter]
 type formRenderProps('a) = {
-  pristine: bool,
-  handleSubmit: ReactEvent.Form.t => unit,
-  submitting: bool,
+  active: option(string),
+  dirty: bool,
+  dirtyFields: Js.Dict.t(string),
+  dirtySinceLastSubmit: bool,
+  error: option(string),
+  errors: Js.Dict.t(string),
   form: form('a),
+  handleSubmit: ReactEvent.Form.t => unit,
+  hasSubmitErrors: bool,
+  hasValidationErrors: bool,
+  initialValues: option(Js.Dict.t(string)),
+  invalid: bool,
+  modified: Js.Dict.t(string),
+  pristine: bool,
+  submitError: option(string),
+  submitErrors: Js.Dict.t(string),
+  submitFailed: bool,
+  submitSucceeded: bool,
+  submitting: bool,
+  touched: Js.Dict.t(string),
   valid: bool,
+  validating: bool,
+  values: Js.Dict.t(string),
+  visited: Js.Dict.t(string)
 };
 
 let useForm = (~onSubmit, ~validate=?, ()) => {

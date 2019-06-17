@@ -8,8 +8,9 @@ it('Input and submit', () => {
 
 it('Validates after touch', () => {
   cy.visit('/simple');
-  cy.contains("First Name can't be empty").should('not.exist');
-  cy.contains("Last Name can't be empty").should('not.exist');
+  
+  cy.get('form').contains("First Name can't be empty").should('not.exist');
+  cy.get('form').contains("Last Name can't be empty").should('not.exist');
   
   cy.get("input[name='firstName']").type('Gob');
   cy.get("input[name='firstName']").clear();
