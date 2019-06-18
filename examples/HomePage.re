@@ -6,7 +6,7 @@ let handleClick = (path, event) => {
 [@react.component]
 let make = () => {
   let handleClickSimple = handleClick("/simple");
-  let handleClickFormActions = handleClick("/actions");
+  let handleClickFormActions = handleClick("/advanced");
 
   <div>
     <ul>
@@ -17,7 +17,7 @@ let make = () => {
       </li>
       <li>
         <a href="#" onClick=handleClickFormActions>
-          {ReasonReact.string("Form Actions")}
+          {ReasonReact.string("Advanced Example")}
         </a>
       </li>
     </ul>
