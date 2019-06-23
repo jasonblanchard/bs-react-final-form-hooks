@@ -6,3 +6,6 @@ npm-debug.log
 /cypress/
 /examples/
 /lib
+.circleci
+cypress.json
+webpack.config.js
